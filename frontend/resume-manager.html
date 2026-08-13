@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Manager - AI Career Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a href="landingpage.html" class="brand">AI <span>Career Agent</span></a>
+        <div class="nav-list">
+          <div class="nav-item"><span class="nav-dot"></span> Dashboard</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#a78bfa"></span> Jobs</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#f59e0b"></span> Applications</div>
+          <div class="nav-item active"><span class="nav-dot" style="color:#34d399"></span> Resume</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#fb7185"></span> Interviews</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#60a5fa"></span> Career</div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="topbar">
+          <h1 class="page-title">Resume manager</h1>
+          <div class="top-actions">
+            <button class="btn ghost">Version history</button>
+            <button class="btn primary">Save corrections</button>
+          </div>
+        </div>
+
+        <div class="page-grid">
+          <div class="card panel">
+            <div class="panel-header">
+              <h3 class="section-title">Uploaded resumes</h3>
+              <span class="pill green">Ready</span>
+            </div>
+            <div class="form-grid">
+              <div class="empty-state" style="border:1px dashed var(--border); border-radius:12px; min-height:120px; display:grid; place-items:center;">
+                Drop a file or browse your library
+              </div>
+              <div class="metric">
+                <span>Master Resume.pdf</span>
+                <span class="pill green">Primary</span>
+              </div>
+              <div class="metric">
+                <span>Product_Manager_2026.pdf</span>
+                <span class="pill blue">Processing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card panel">
+            <div class="panel-header">
+              <h3 class="section-title">AI extracted profile</h3>
+            </div>
+            <div class="form-grid">
+              <div class="field-group">
+                <label>Skills</label>
+                <div class="multi-input">
+                  <span class="skill-tag">SQL</span>
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Python</span>
+                </div>
+              </div>
+              <div class="field-group">
+                <label>Experience</label>
+                <textarea>Senior Analyst | BrightPath Health | 2021–2024
+Led product analytics and built dashboards for customer conversion and retention.</textarea>
+              </div>
+              <div class="field-group">
+                <label>Education</label>
+                <input type="text" value="B.S. Data Analytics, University of Texas" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

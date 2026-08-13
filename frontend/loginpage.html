@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - AI Career Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      :root {
+        --bg: #07111f;
+        --panel: #0f172a;
+        --panel-2: #111c33;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --accent-2: #8b5cf6;
+        --success: #22c55e;
+        --danger: #ef4444;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #111827 60%, #1e293b);
+        color: var(--text);
+      }
+
+      .auth-shell {
+        width: min(480px, calc(100% - 32px));
+        background: rgba(15, 23, 42, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 28px;
+        padding: 28px 28px 24px;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+      }
+
+      .brand {
+        display: inline-block;
+        margin-bottom: 14px;
+        font-size: 1.1rem;
+        font-weight: 800;
+      }
+
+      .brand span { color: var(--accent); }
+
+      .auth-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .auth-header h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+      }
+
+      .toggle {
+        display: flex;
+        gap: 8px;
+        background: rgba(255,255,255,0.04);
+        padding: 6px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .toggle button {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .toggle button.active {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+
+      .auth-subtitle {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+
+      .error-message {
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.26);
+        color: #fee2e2;
+        display: none;
+      }
+
+      .form-group {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      label {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.04);
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      input::placeholder {
+        color: rgba(255,255,255,0.45);
+      }
+
+      .password-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+
+      .password-strength {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .row-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 4px 0 18px;
+      }
+
+      .muted-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .primary-btn {
+        width: 100%;
+        border: none;
+        border-radius: 999px;
+        padding: 14px 18px;
+        font-weight: 800;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .oauth {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .oauth button {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.12);
+        color: var(--text);
+        padding: 12px 14px;
+        border-radius: 14px;
+        cursor: pointer;
+      }
+
+      .help-text {
+        text-align: center;
+        margin-top: 18px;
+        color: var(--muted);
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-shell">
+      <div class="brand">AI <span>Career Agent</span></div>
+
+      <div class="auth-header">
+        <h1 id="auth-title">Welcome back</h1>
+        <div class="toggle" aria-label="Auth mode switcher">
+          <button type="button" class="active" data-mode="login">Login</button>
+          <button type="button" data-mode="register">Register</button>
+        </div>
+      </div>
+
+      <p id="auth-subtitle" class="auth-subtitle">Log in to continue your job search and track your next move.</p>
+      <div id="error" class="error-message"></div>
+
+      <form id="auth-form">
+        <div class="form-group hidden" id="name-group">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <div class="password-row">
+            <label for="password">Password</label>
+            <span id="password-strength" class="password-strength hidden">Weak</span>
+          </div>
+          <input id="password" name="password" type="password" placeholder="Enter your password" required />
+        </div>
+
+        <div class="form-group hidden" id="confirm-group">
+          <label for="confirm-password">Confirm password</label>
+          <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm your password" />
+        </div>
+
+        <div class="row-links">
+          <span id="extra-text" class="hidden">Already have an account?</span>
+          <a href="#" class="muted-link" id="forgot-link">Forgot password?</a>
+        </div>
+
+        <button id="submit-btn" class="primary-btn" type="submit">Login</button>
+      </form>
+
+      <div class="oauth">
+        <button type="button">Google</button>
+        <button type="button">LinkedIn</button>
+      </div>
+
+      <p class="help-text">
+        <span id="switch-copy">Need an account?</span>
+        <a href="#" class="muted-link" id="switch-link">Create one</a>
+      </p>
+    </div>
+
+    <script>
+      const authForm = document.getElementById('auth-form');
+      const title = document.getElementById('auth-title');
+      const subtitle = document.getElementById('auth-subtitle');
+      const submitBtn = document.getElementById('submit-btn');
+      const switchLink = document.getElementById('switch-link');
+      const switchCopy = document.getElementById('switch-copy');
+      const forgotLink = document.getElementById('forgot-link');
+      const errorBox = document.getElementById('error');
+      const nameGroup = document.getElementById('name-group');
+      const confirmGroup = document.getElementById('confirm-group');
+      const passwordStrength = document.getElementById('password-strength');
+      const modeButtons = document.querySelectorAll('[data-mode]');
+
+      const validAccount = {
+        email: 'user@example.com',
+        password: 'StrongPassword123',
+        name: 'Career Seeker',
+      };
+
+      let mode = 'login';
+
+      function showError(message) {
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+      }
+
+      function hideError() {
+        errorBox.style.display = 'none';
+      }
+
+      function setMode(nextMode) {
+        mode = nextMode;
+        const isLogin = mode === 'login';
+
+        title.textContent = isLogin ? 'Welcome back' : 'Create your account';
+        subtitle.textContent = isLogin
+          ? 'Log in to continue your job search and track your next move.'
+          : 'Set up your profile and unlock personalized career guidance.';
+
+        submitBtn.textContent = isLogin ? 'Login' : 'Create account';
+        nameGroup.classList.toggle('hidden', isLogin);
+        confirmGroup.classList.toggle('hidden', isLogin);
+        passwordStrength.classList.toggle('hidden', isLogin);
+        forgotLink.classList.toggle('hidden', !isLogin);
+
+        switchCopy.textContent = isLogin ? 'Need an account?' : 'Already have an account?';
+        switchLink.textContent = isLogin ? 'Create one' : 'Login';
+
+        modeButtons.forEach((button) => {
+          button.classList.toggle('active', button.dataset.mode === mode);
+        });
+
+        if (!isLogin) {
+          document.getElementById('name').setAttribute('required', 'required');
+          document.getElementById('confirm-password').setAttribute('required', 'required');
+        } else {
+          document.getElementById('name').removeAttribute('required');
+          document.getElementById('confirm-password').removeAttribute('required');
+        }
+      }
+
+      function evaluatePasswordStrength(password) {
+        if (password.length < 8) return 'Weak';
+        if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return 'Strong';
+        return 'Medium';
+      }
+
+      document.getElementById('password').addEventListener('input', function () {
+        const strength = evaluatePasswordStrength(this.value);
+        passwordStrength.textContent = strength;
+        passwordStrength.classList.remove('hidden');
+      });
+
+      modeButtons.forEach((button) => {
+        button.addEventListener('click', () => setMode(button.dataset.mode));
+      });
+
+      switchLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        setMode(mode === 'login' ? 'register' : 'login');
+      });
+
+      forgotLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        showError('Password reset is available in the full app flow. Demo account: user@example.com');
+      });
+
+      authForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        hideError();
+
+        const email = authForm.email.value.trim();
+        const password = authForm.password.value;
+
+        if (mode === 'register') {
+          const name = authForm.name.value.trim();
+          const confirmPassword = authForm['confirm-password'].value;
+
+          if (!name || !email || !password || !confirmPassword) {
+            showError('Please complete all required fields.');
+            return;
+          }
+
+          if (password.length < 8) {
+            showError('Use a password with at least 8 characters.');
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            showError('Passwords do not match.');
+            return;
+          }
+
+          localStorage.setItem('aiCareerAgentUser', JSON.stringify({ email, name }));
+          window.location.href = 'main.html';
+          return;
+        }
+
+        if (!email || !password) {
+          showError('Please enter email and password.');
+          return;
+        }
+
+        if (email.toLowerCase() === validAccount.email && password === validAccount.password) {
+          localStorage.setItem('aiCareerAgentUser', JSON.stringify({
+            email: validAccount.email,
+            name: validAccount.name,
+          }));
+          window.location.href = 'main.html';
+          return;
+        }
+
+        showError('Invalid credentials. Try user@example.com / StrongPassword123.');
+      });
+
+      const currentUser = localStorage.getItem('aiCareerAgentUser');
+      if (currentUser) {
+        window.location.href = 'main.html';
+      }
+
+      setMode('login');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onboarding - AI Career Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a href="landingpage.html" class="brand">AI <span>Career Agent</span></a>
+        <div class="nav-list">
+          <div class="nav-item active"><span class="nav-dot"></span> Dashboard</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#a78bfa"></span> Jobs</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#f59e0b"></span> Applications</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#34d399"></span> Resume</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#fb7185"></span> Interviews</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#60a5fa"></span> Career</div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="topbar">
+          <h1 class="page-title">Welcome setup</h1>
+          <div class="top-actions">
+            <button class="btn ghost">Skip for now</button>
+            <button class="btn primary">Continue</button>
+          </div>
+        </div>
+
+        <div class="card panel">
+          <div class="panel-header">
+            <h3 class="section-title">Onboarding wizard</h3>
+            <span class="pill blue">Step 1 of 4</span>
+          </div>
+
+          <div class="page-grid">
+            <div class="form-card card">
+              <div class="form-grid">
+                <div class="field-group">
+                  <label for="full-name">Full name</label>
+                  <input id="full-name" type="text" value="Career Seeker" />
+                </div>
+                <div class="field-group">
+                  <label for="phone">Phone number</label>
+                  <input id="phone" type="tel" value="(555) 321-9812" />
+                </div>
+                <div class="field-group">
+                  <label for="location">Location</label>
+                  <input id="location" type="text" value="Austin, TX" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-card card">
+              <div class="field-group">
+                <label>Resume upload</label>
+                <div class="empty-state" style="border:1px dashed var(--border); border-radius:12px; min-height:160px; display:grid; place-items:center;">
+                  Drag and drop or browse PDF, DOCX, or TXT.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 18px;">
+            <div class="form-card card">
+              <div class="field-group">
+                <label>Target roles</label>
+                <div class="multi-input">
+                  <span class="skill-tag">Product Manager</span>
+                  <span class="skill-tag">Data Analyst</span>
+                  <span class="skill-tag">UX Designer</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-card card">
+              <div class="field-group">
+                <label>Preferred locations</label>
+                <div class="multi-input">
+                  <span class="skill-tag">Remote</span>
+                  <span class="skill-tag">New York</span>
+                  <span class="skill-tag">Austin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

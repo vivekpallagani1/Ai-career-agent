@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Feed - AI Career Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a href="landingpage.html" class="brand">AI <span>Career Agent</span></a>
+        <div class="nav-list">
+          <div class="nav-item"><span class="nav-dot"></span> Dashboard</div>
+          <div class="nav-item active"><span class="nav-dot" style="color:#a78bfa"></span> Jobs</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#f59e0b"></span> Applications</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#34d399"></span> Resume</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#fb7185"></span> Interviews</div>
+          <div class="nav-item"><span class="nav-dot" style="color:#60a5fa"></span> Career</div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="topbar">
+          <h1 class="page-title">Job feed</h1>
+          <div class="top-actions">
+            <input type="text" class="search" placeholder="Search jobs, companies, skills" />
+            <button class="btn primary">Filter</button>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card panel">
+            <div class="panel-header">
+              <h3 class="section-title">Recommended roles</h3>
+              <span class="pill green">Top matches</span>
+            </div>
+            <div class="job-grid">
+              <article class="job-card">
+                <div class="job-card-heading">
+                  <h4>Senior Product Designer</h4>
+                  <span class="match-pill">94%</span>
+                </div>
+                <div class="job-meta">Northstar Labs • Remote</div>
+                <div class="job-meta">$120k - $145k</div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Figma</span>
+                  <span class="skill-tag">UX Research</span>
+                  <span class="skill-tag">Design Systems</span>
+                </div>
+                <div class="job-actions">
+                  <button class="tiny-btn primary">View Details</button>
+                  <button class="tiny-btn">Prepare</button>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-heading">
+                  <h4>Data Analyst</h4>
+                  <span class="match-pill">91%</span>
+                </div>
+                <div class="job-meta">BrightPath • New York</div>
+                <div class="job-meta">$98k - $118k</div>
+                <div class="skill-tags">
+                  <span class="skill-tag">SQL</span>
+                  <span class="skill-tag">Power BI</span>
+                  <span class="skill-tag">Dashboards</span>
+                </div>
+                <div class="job-actions">
+                  <button class="tiny-btn primary">View Details</button>
+                  <button class="tiny-btn">Prepare</button>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-heading">
+                  <h4>Full Stack Engineer</h4>
+                  <span class="match-pill">89%</span>
+                </div>
+                <div class="job-meta">Orbit Works • Austin</div>
+                <div class="job-meta">$130k - $170k</div>
+                <div class="skill-tags">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">AWS</span>
+                </div>
+                <div class="job-actions">
+                  <button class="tiny-btn primary">View Details</button>
+                  <button class="tiny-btn">Prepare</button>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="card panel">
+            <div class="panel-header">
+              <h3 class="section-title">Filters</h3>
+            </div>
+            <div class="form-grid">
+              <div class="field-group">
+                <label>Location</label>
+                <select>
+                  <option>Remote</option>
+                  <option>Hybrid</option>
+                  <option>On-site</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label>Match score</label>
+                <input type="range" min="0" max="100" value="80" />
+              </div>
+              <div class="field-group">
+                <label>Risk filter</label>
+                <select>
+                  <option>Low risk</option>
+                  <option>Medium risk</option>
+                  <option>High risk</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
