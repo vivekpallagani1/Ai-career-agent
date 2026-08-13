@@ -1,0 +1,5 @@
+{
+  "builder": "dockerfile",
+  "buildCommand": "docker-compose build",
+  "startCommand": "docker-compose up"
+}
